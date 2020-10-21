@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button navPop>
+        close
+      </button>
+    </ion-buttons>
+
+    <ion-title>Popust za {{ coupon.product }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <img src="{{ coupon.photoURL }}"/>
+    <ion-card-content>
+      <ion-card-title>
+        <span *ngIf="!coupon.discount">Popust na {{ coupon.product }}. Plačaj {{ coupon.priceNew }}€ namesto {{ coupon.price }}€</span>
+        <span *ngIf="coupon.discount">{{ coupon.discount }}% popusta na {{ coupon.product }}</span>
+      </ion-card-title>
+      <p>
+        Kupon lahko unovčiš v {{ coupon.vendorName }}.
+      </p>
+      <br>
+      <p text-right>
+        <button ion-button outline (click)="onUse()">Uporabi</button>
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

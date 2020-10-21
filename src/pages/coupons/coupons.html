@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Moji kuponi</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Neporabljeni kuponi
+    </ion-list-header>
+
+    <!-- <ion-item *ngIf="!coupons">
+      <p>Nimaš neuporabljenih kuponov</p>
+    </ion-item> -->
+
+    <ion-item *ngFor="let coupon of coupons | filter: { used: false }">
+      <ion-avatar item-start>
+        <img src="{{ coupon.photoURL }}">
+      </ion-avatar>
+      <h2>{{ coupon.product }}</h2>
+      <h3>{{ coupon.vendorName }}</h3>
+      <p>Kupon za {{ coupon.product }} v {{ coupon.vendorName }}</p>
+      <button ion-button clear item-end (click)="onOpenCoupon(coupon)">Poglej</button>
+    </ion-item>
+
+    <ion-list-header>
+      Porabljeni kuponi
+    </ion-list-header>
+
+    <ion-item *ngFor="let coupon of coupons | filter: { used: true }">
+      <ion-avatar item-start>
+        <img src="{{ coupon.photoURL }}">
+      </ion-avatar>
+      <h2>{{ coupon.product }}</h2>
+      <h3>{{ coupon.vendorName }}</h3>
+      <p>Kupon za {{ coupon.product }} v {{ coupon.vendorName }}</p>
+      <!-- <button ion-button clear item-end (click)="onUserCoupon(coupon.key)">Uporabi</button> -->
+    </ion-item>
+
+  </ion-list>
+</ion-content>

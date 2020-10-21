@@ -1,0 +1,24 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content text-center>
+  <img id="logo" src="assets/images/myqpon-logo.svg" alt="">
+
+  <button ion-button icon-left color="secondary" (click)="onSignInWithSocial('Facebook')">
+    <ion-icon name="logo-facebook"></ion-icon>
+    Login using Facebook
+  </button>
+
+  <br><br>
+
+  <button ion-button icon-left color="danger" (click)="onSignInWithSocial('Google')">
+    <ion-icon name="logo-google"></ion-icon>
+    Login using Google
+  </button>
+</ion-content>

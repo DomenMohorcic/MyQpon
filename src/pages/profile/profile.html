@@ -1,0 +1,29 @@
+<ion-header>
+
+  <!-- <ion-navbar>
+    <ion-title>Ponudniki</ion-title>
+  </ion-navbar> -->
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let vendor of vendors | async">
+      <!-- <ion-avatar item-start>
+        <img src="{{ vendor.photoURL }}">
+      </ion-avatar> -->
+      <ion-thumbnail item-start>
+        <img src="{{ vendor.photoURL }}">
+      </ion-thumbnail>
+      <h2>{{ vendor.name }}</h2>
+      <p>{{ vendor.offers }}</p>
+    </ion-item>
+  </ion-list>
+
+  <p text-center>
+    <button ion-button outline small (click)="onSignOut()">Odjava</button>
+  </p>
+
+</ion-content>

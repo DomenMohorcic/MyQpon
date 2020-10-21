@@ -1,0 +1,85 @@
+<div id="my-overlay" padding [hidden]="user">
+</div>
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>MyQpon</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="user" id="profile">
+    <ion-row>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <img src="{{ user.photoURL }}" id="profile-pic" />
+      </ion-col>
+      <ion-col col-8>
+        <h5>
+          <span ion-text color="primary">{{ user.displayName }}</span>
+          <br>
+          <span id="subtext">Level: {{ user.level }}</span>
+          <br>
+          <span id="hint">Do naslednjega levela še: {{ userProvider.getRequiredXPforNextLvl(user.xp) }} točk</span>
+        </h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><hr></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <br>
+
+  <!-- <ion-list *ngIf="user">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ user.photoURL }}">
+      </ion-avatar>
+      <h2>{{ user.displayName }}</h2>
+      <h3>Level: {{ user.level }}</h3>
+      <p>Do naslednjega levela še {{ userProvider.getRequiredXPforNextLvl(user.level) }} točk</p>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-list *ngIf="user">
+    <ion-list-header>
+      Moj nahrbtnik kuponov <span>({{ numUnused }}/{{ couponLimit }})</span>
+    </ion-list-header>
+
+    <ion-item *ngFor="let coupon of unusedCoupons | async | filter: { used: false }">
+      <ion-avatar item-start>
+        <img src="{{ coupon.photoURL }}">
+      </ion-avatar>
+      <h2>{{ coupon.product }}</h2>
+      <h3>{{ coupon.vendorName }}</h3>
+      <p>Popust na {{ coupon.product }} v {{ coupon.vendorName }}</p>
+      <button ion-button clear item-end (click)="onOpenCoupon(coupon)">Poglej</button>
+    </ion-item>
+
+    <!-- <ion-item *ngIf="user && !user.coupons">
+      <p>Tvoj nahrbtnik je prazen, igraj in poišči kupone!</p>
+    </ion-item> -->
+
+    <ion-item *ngIf="numUnused < couponLimit">
+      <p text-center>
+        Prostih mest za kupone:
+        <span *ngIf="!user.coupons">{{ couponLimit }}</span>
+        <span *ngIf="user && user.coupons">{{ couponLimit - numUnused }}</span>
+      </p>
+    </ion-item>
+
+    <ion-item (click)="onShare()">
+      <p text-center *ngIf="numUnused && numUnused >= couponLimit">
+        Nimaš več prostora za kupone
+      </p>
+      <h4 text-center><button ion-button outline>Odkleni več prostora</button></h4>
+    </ion-item>
+  </ion-list>
+
+  <p text-center>
+    <button (click)="onStartGame()" ion-button large round icon-end>IGRAJ <ion-icon name="arrow-forward"></ion-icon></button>
+  </p>
+</ion-content>
