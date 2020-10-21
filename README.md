@@ -1,5 +1,9 @@
 # MyQpon app
 
+## Description
+
+App is used to play games and receive coupons for bars in Novo mesto, Slovenija.
+
 ## Building
 
 ```bash
